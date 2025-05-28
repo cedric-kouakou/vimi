@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail du Produit - Les Produits Vimi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-detail {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-info h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-meta {
+            margin: 20px 0;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-size: 1.2em;
+        }
+
+        .reviews {
+            color: #666;
+        }
+
+        .product-price {
+            font-size: 2em;
+            color: #c61717;
+            margin: 20px 0;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .product-features {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .feature-item i {
+            color: #4CAF50;
+        }
+
+        .product-actions {
+            margin-top: 30px;
+        }
+
+        .suggested-products {
+            margin-top: 50px;
+        }
+
+        .suggested-products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-origin {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .product-origin h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .origin-details {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 992px) {
+            .suggestions-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-main {
+                grid-template-columns: 1fr;
+            }
+
+            .suggestions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .suggestions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- En-tête / Navigation -->
+    <header>
+        // ...existing code...
+    </header>
+
+    <!-- Détail du produit -->
+    <div class="product-detail">
+        <div class="product-main">
+            <div class="product-gallery">
+                <img src="" alt="" class="product-image main-image">
+            </div>
+            <div class="product-info">
+                <h1 class="product-title"></h1>
+                <div class="product-meta">
+                    <div class="product-rating">
+                        <span class="rating"></span>
+                        <span class="review-count"></span>
+                    </div>
+                    <div class="product-price"></div>
+                    <p class="product-description"></p>
+                </div>
+                <div class="product-features">
+                    <h3>Caractéristiques</h3>
+                    <ul class="features-list"></ul>
+                </div>
+                <div class="product-origin">
+                    <h3>Origine</h3>
+                    <p>Pays d'origine: <span class="origin-country"></span></p>
+                    <p>Conditionné en: <span class="origin-processing"></span></p>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" onclick="addToCart(getUrlParam('product'))">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="related-products-section">
+            <h2>Produits similaires</h2>
+            <div class="related-products"></div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        // ...existing code...
+    </footer>
+
+    <script src="js/product-detail.js"></script>
+</body>
+</html>

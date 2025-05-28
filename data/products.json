@@ -1,0 +1,127 @@
+{
+    "sel-vimi": {
+        "id": "sel-vimi",
+        "name": "Sel Vimi iodé 350g",
+        "price": 500,
+        "rating": 5,
+        "reviews": 125,
+        "image": "produit1.jpg",
+        "description": "Le sel iodé Vimi est un produit de haute qualité, spécialement traité pour garantir un apport optimal en iode. Idéal pour une cuisine saine et équilibrée, il contribue à votre bien-être quotidien.",
+        "origin": {
+            "source": "Maroc",
+            "packaging": "Reconditionné en Côte d'Ivoire",
+            "certification": "Certifié et contrôlé selon les normes alimentaires"
+        },
+        "features": [
+            "100% naturel",
+            "Riche en iode",
+            "Sans additifs artificiels"
+        ],
+        "category": "condiments",
+        "suggestions": ["soumara", "piment", "poivre"]
+    },
+    "soumara": {
+        "id": "soumara",
+        "name": "Soumara Vimi moulu 150g",
+        "price": 1500,
+        "rating": 5,
+        "reviews": 89,
+        "image": "produit2.jpg",
+        "description": "Le Soumara Vimi moulu est un condiment traditionnel africain, préparé à partir de graines de néré fermentées. Son goût unique rehausse la saveur de vos plats.",
+        "origin": {
+            "source": "Côte d'Ivoire",
+            "packaging": "Conditionné en Côte d'Ivoire",
+            "certification": "100% naturel et authentique"
+        },
+        "features": [
+            "100% naturel",
+            "Saveur authentique",
+            "Préparation traditionnelle"
+        ],
+        "category": "condiments",
+        "suggestions": ["sel-vimi", "piment", "poivre"]
+    },    "piment": {
+        "id": "piment",
+        "name": "Piment Vimi moulu 140g",
+        "price": 1500,
+        "rating": 5,
+        "reviews": 156,
+        "image": "produit3.jpg",
+        "description": "Le piment moulu Vimi apporte une touche de chaleur et de caractère à vos plats. Soigneusement sélectionné et séché, il conserve toute son intensité.",
+        "origin": {
+            "source": "Côte d'Ivoire",
+            "packaging": "Conditionné en Côte d'Ivoire",
+            "certification": "100% piment naturel"
+        },
+        "features": [
+            "100% naturel",
+            "Séchage traditionnel",
+            "Saveur intense"
+        ],
+        "category": "condiments",
+        "suggestions": ["sel-vimi", "soumara", "poivre"]
+    },
+    "farine-mais": {
+        "id": "farine-mais",
+        "name": "Farine Maïs Dimi Jaune 1kg",
+        "price": 1500,
+        "rating": 5,
+        "reviews": 78,
+        "image": "produit4.jpg",
+        "description": "La farine de maïs Dimi est produite à partir de maïs local de haute qualité. Sans gluten et naturellement nutritive, elle est parfaite pour vos préparations traditionnelles.",
+        "origin": {
+            "source": "Côte d'Ivoire",
+            "packaging": "Conditionné en Côte d'Ivoire",
+            "certification": "100% maïs naturel"
+        },
+        "features": [
+            "100% naturel",
+            "Sans gluten",
+            "Riche en fibres"
+        ],
+        "category": "farines",
+        "suggestions": ["poudre-baobab", "sel-vimi"]
+    },
+    "poudre-baobab": {
+        "id": "poudre-baobab",
+        "name": "Poudre de Baobab Keda 1kg",
+        "price": 2000,
+        "rating": 5,
+        "reviews": 145,
+        "image": "produit5.jpg",
+        "description": "La poudre de baobab Keda est un super-aliment naturel riche en vitamines et minéraux. Elle est obtenue à partir de la pulpe séchée des fruits du baobab.",
+        "origin": {
+            "source": "Côte d'Ivoire",
+            "packaging": "Conditionné en Côte d'Ivoire",
+            "certification": "100% naturel"
+        },
+        "features": [
+            "100% naturel",
+            "Sans gluten",
+            "Riche en vitamines"
+        ],
+        "category": "superaliments",
+        "suggestions": ["farine-mais", "sel-vimi"]
+    },
+    "poivre": {
+        "id": "poivre",
+        "name": "Poivre Vimi moulu 160g",
+        "price": 2000,
+        "rating": 5,
+        "reviews": 98,
+        "image": "produit7.jpg",
+        "description": "Le poivre moulu Vimi est sélectionné avec soin pour son arôme intense et sa qualité supérieure. Idéal pour relever vos plats avec élégance.",
+        "origin": {
+            "source": "Madagascar",
+            "packaging": "Conditionné en Côte d'Ivoire",
+            "certification": "100% poivre naturel"
+        },
+        "features": [
+            "100% naturel",
+            "Arôme intense",
+            "Mouture fine"
+        ],
+        "category": "condiments",
+        "suggestions": ["sel-vimi", "piment", "soumara"]
+    }
+}

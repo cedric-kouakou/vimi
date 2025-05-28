@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Les Produits Vimi</title>
+    <meta name="description" content="Créez votre compte Les Produits Vimi et bénéficiez de codes promo et offres exclusives.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-page {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .auth-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+
+        .auth-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .form-group .error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #45a049;
+        }
+
+        .auth-footer {
+            text-align: center;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .terms {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .terms a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .auth-page {
+                margin: 20px auto;
+            }
+
+            .auth-container {
+                padding: 30px 20px;
+            }
+
+            .auth-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">
+                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu Principal -->
+    <main class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <img src="images/logo.png" alt="Logo Vimi">
+                <h1 class="auth-title">Créer un compte</h1>
+                <p class="auth-subtitle">Rejoignez la famille Vimi et profitez d'offres exclusives</p>
+            </div>
+
+            <form id="register-form" novalidate>
+                <div class="form-group">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                    <div class="error">Veuillez entrer votre prénom</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Nom</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                    <div class="error">Veuillez entrer votre nom</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error">Veuillez entrer un email valide</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <div class="error">Veuillez entrer un numéro de téléphone valide</div>
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" class="password-toggle">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <div class="error">Le mot de passe doit contenir au moins 8 caractères</div>
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <button type="button" class="password-toggle">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <div class="error">Les mots de passe ne correspondent pas</div>
+                </div>
+
+                <div class="terms">
+                    <label>
+                        <input type="checkbox" required> J'accepte les <a href="#">conditions générales</a> et la <a href="#">politique de confidentialité</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">Créer mon compte</button>
+
+                <div class="auth-footer">
+                    Vous avez déjà un compte ? <a href="login.html">Se connecter</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">
+                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="products.html">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>
+
+    <script>
+        // Validation du formulaire
+        const form = document.getElementById('register-form');
+        const passwordToggles = document.querySelectorAll('.password-toggle');
+
+        // Gestion de l'affichage/masquage du mot de passe
+        passwordToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('bi-eye', 'bi-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.replace('bi-eye-slash', 'bi-eye');
+                }
+            });
+        });
+
+        // Validation à la soumission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            // Validation des champs requis
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.parentElement.querySelector('.error').style.display = 'block';
+                } else {
+                    field.parentElement.querySelector('.error').style.display = 'none';
+                }
+            });
+
+            // Validation de l'email
+            const email = document.getElementById('email');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value)) {
+                isValid = false;
+                email.parentElement.querySelector('.error').style.display = 'block';
+            }
+
+            // Validation du mot de passe
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm-password');
+            
+            if (password.value.length < 8) {
+                isValid = false;
+                password.parentElement.querySelector('.error').style.display = 'block';
+            }
+
+            if (password.value !== confirmPassword.value) {
+                isValid = false;
+                confirmPassword.parentElement.querySelector('.error').style.display = 'block';
+            }
+
+            // Si tout est valide, on peut soumettre le formulaire
+            if (isValid) {
+                console.log('Formulaire valide, envoi des données...');
+                // Ici, vous pouvez ajouter le code pour envoyer les données au serveur
+            }
+        });
+    </script>
+</body>
+</html>

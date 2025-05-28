@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Contact - Les Produits Vimi | Devenez Représentant</title>
+    <meta name="description" content="Contactez Les Produits Vimi ou devenez représentant de nos produits naturels en Côte d'Ivoire. Rejoignez-nous pour promouvoir une alimentation saine et naturelle.">    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/banner-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Styles pour la section contact-info simplifiée */
+        .contact-info {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .contact-direct {
+            margin: 15px 0;
+        }
+
+        .contact-link, .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+            margin: 10px 0;
+        }
+
+        .contact-link:hover, .social-link:hover {
+            color: #c61717;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-item h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .info-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: #45a049;
+        }
+
+        .email-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .email-list li {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        input[type="tel"]::placeholder {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Update form layout for better organization */
+        .representative-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .representative-form .form-group:last-child,
+        .representative-form .checkbox-group,
+        .representative-form button {
+            grid-column: 1 / -1;
+        }        /* Styles pour les formulaires */
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Gestion de l'affichage des formulaires */
+        .client-form,
+        .representative-form {
+            display: none;
+        }
+
+        body[data-form-type="client"] .client-form {
+            display: block;
+        }
+
+        body[data-form-type="representative"] .representative-form {
+            display: grid;
+        }
+
+        /* Style du select pour le sujet */
+        #client-subject {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-hero h1 {
+                font-size: 2em;
+            }
+
+            .representative-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-header">
+                <h2>Rechercher un produit</h2>
+                <button class="close-search"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Rechercher un produit..." class="search-input">
+            </div>
+            <div class="popular-searches">
+                <h3>Recherches populaires</h3>
+                <div class="search-tags">
+                    <a href="#">Sel Vimi</a>
+                    <a href="#">Soumara</a>
+                    <a href="#">Piment</a>
+                    <a href="#">Farine Maïs</a>
+                    <a href="#">Miel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">
+                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                    <a href="register.html"><i class="bi bi-person-plus"></i> S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière Contact -->
+    <section class="contact-hero">
+        <h1>Contactez-nous</h1>
+        <p>Nous sommes là pour vous aider</p>
+    </section>
+
+    <!-- Contenu principal -->
+    <div class="contact-content">
+        <div class="contact-form">
+            <h2>Envoyez-nous un message</h2>
+            <div class="form-group">
+                <label for="contact-type">Je suis</label>
+                <select id="contact-type" class="form-select" onchange="toggleFormFields()">
+                    <option value="client">Un client souhaitant envoyer un message</option>
+                    <option value="representative">Intéressé pour devenir représentant</option>
+                </select>
+            </div>
+
+            <!-- Formulaire Client -->
+            <form action="#" method="POST" class="client-form" id="clientForm">
+                <div class="form-group">
+                    <label for="client-name" class="required">Nom complet</label>
+                    <input type="text" id="client-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-email" class="required">E-mail</label>
+                    <input type="email" id="client-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Téléphone</label>
+                    <input type="tel" id="client-phone" name="phone" placeholder="+225 XX XX XX XX XX">
+                </div>
+                <div class="form-group">
+                    <label for="client-subject" class="required">Sujet</label>
+                    <select id="client-subject" name="subject" required>
+                        <option value="">Sélectionnez un sujet</option>
+                        <option value="commande">Question sur une commande</option>
+                        <option value="produit">Information sur un produit</option>
+                        <option value="livraison">Question sur la livraison</option>
+                        <option value="autre">Autre demande</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="client-message" class="required">Message</label>
+                    <textarea id="client-message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="contact-button">Envoyer le message</button>
+            </form>
+
+            <!-- Formulaire Représentant -->
+            <form action="#" method="POST" class="representative-form" id="representativeForm">
+                <div class="form-group">
+                    <label for="firstname" class="required">Prénom</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="required">Nom</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="enterprise">Entreprise</label>
+                    <input type="text" id="enterprise" name="enterprise">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="required">Ville</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="commune" class="required">Commune</label>
+                    <input type="text" id="commune" name="commune" required>
+                </div>
+                <div class="form-group">
+                    <label for="quartier" class="required">Quartier</label>
+                    <input type="text" id="quartier" name="quartier" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="required">Téléphone</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="+225 XX XX XX XX XX">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Message (Optionnel)</label>
+                    <textarea id="comment" name="comment" placeholder="Parlez-nous de votre expérience ou de vos motivations..."></textarea>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Soyez informé des nouveautés et promotions</label>
+                </div>
+                <button type="submit" class="contact-button">Devenir représentant</button>
+            </form>
+        </div>        <div class="contact-info">
+            <div class="info-item">
+                <h3>Contactez-nous directement</h3>
+                <p class="contact-direct">
+                    <a href="tel:+2250151035443" class="contact-link">
+                        <i class="bi bi-telephone"></i> (+225) 01 51 03 5443
+                    </a>
+                </p>
+                <p class="contact-direct">
+                    <a href="mailto:info@lesproduitsvimi.com" class="contact-link">
+                        <i class="bi bi-envelope"></i> info@produitsvimi.com
+                    </a>
+                </p>
+            </div>
+            <div class="info-item">
+                <h3>Réseaux sociaux</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/LesProduitsVimi" target="_blank" class="social-link">
+                        <i class="bi bi-facebook"></i> Facebook
+                    </a>
+                    <a href="https://wa.me/2250151035443" target="_blank" class="social-link">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="info-item">
+                <h3>Horaires</h3>
+                <p>Du lundi au samedi : 8h - 18h</p>
+                <p>Dimanche : Fermé</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="#">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>    <script>
+        function toggleFormFields() {
+            const contactType = document.getElementById('contact-type').value;
+            document.body.setAttribute('data-form-type', contactType);
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Ici, vous pouvez ajouter le code pour envoyer les données du formulaire
+            console.log('Formulaire soumis:', Object.fromEntries(formData));
+            
+            // Afficher un message de confirmation
+            alert('Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.');
+            form.reset();
+        }
+
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleFormFields();
+            
+            // Ajouter les gestionnaires d'événements pour les formulaires
+            document.getElementById('clientForm').addEventListener('submit', handleFormSubmit);
+            document.getElementById('representativeForm').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Produits - Les Produits Vimi | Produits Alimentaires Naturels en Côte d'Ivoire</title>
+    <meta name="description" content="Découvrez notre gamme complète de produits alimentaires naturels : sel iodé, soumara, piment, farines, huile de palme et plus. Produits 100% naturels de Côte d'Ivoire.">    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="js/footer.js" defer></script>
+    <style>
+        /* Styles spécifiques à la page produits */
+        .products-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/banner-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .products-hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .filters {
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-group h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .filter-option label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .price-range input {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .products-content {
+            flex: 1;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .sort-dropdown {
+            position: relative;
+            width: 200px;
+        }
+
+        .sort-button {
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .sort-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            z-index: 10;
+            display: none;
+        }
+
+        .sort-options.active {
+            display: block;
+        }
+
+        .sort-option {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sort-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .load-more button {
+            padding: 12px 30px;
+            background-color: #6BB252;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .load-more button:hover {
+            background-color: #5a9644;
+        }
+
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .qty-btn {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #e9ecef;
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 4px;
+        }
+
+        .add-to-cart {
+            background: #c61717;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart:hover {
+            background: #a01212;
+        }
+
+        .add-to-cart i {
+            font-size: 1.1em;
+        }
+
+        /* Styles pour masquer les flèches du input number */
+        .qty-input::-webkit-inner-spin-button,
+        .qty-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .qty-input {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-header">
+                <h2>Rechercher un produit</h2>
+                <button class="close-search"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Rechercher un produit..." class="search-input">
+            </div>
+            <div class="popular-searches">
+                <h3>Recherches populaires</h3>
+                <div class="search-tags">
+                    <a href="#">Sel Vimi</a>
+                    <a href="#">Soumara</a>
+                    <a href="#">Piment</a>
+                    <a href="#">Farine Maïs</a>
+                    <a href="#">Miel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>                <div class="cart-preview">
+                    <h3>Mon Panier</h3>
+                    <div class="cart-items">
+                        <p class="empty-cart">Votre panier est vide</p>
+                    </div>
+                    <div class="cart-footer">
+                        <div class="cart-total">Total: 0 FCFA</div>
+                        <a href="cart.html" class="btn-primary">Voir le panier</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                    <a href="register.html"><i class="bi bi-person-plus"></i> S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière produits -->
+    <section class="products-hero">
+        <h1>Nos Produits</h1>
+        <p>Des produits 100% naturels, sans conservateurs ni additifs</p>
+    </section>
+
+    <!-- Section Produits avec Filtres -->
+    <section class="filter-section">
+        <!-- Filtres -->
+        <div class="filters">
+            <div class="filter-group">
+                <h3>Catégories</h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="condiments">
+                        <label for="condiments">Condiments</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="farines">
+                        <label for="farines">Farines</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="huiles">
+                        <label for="huiles">Huiles</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="poudres">
+                        <label for="poudres">Poudres</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="thes">
+                        <label for="thes">Thés & Infusions</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Prix</h3>
+                <div class="price-range">
+                    <input type="number" placeholder="Min" min="0">
+                    <input type="number" placeholder="Max" min="0">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Origine</h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="cote-ivoire">
+                        <label for="cote-ivoire">Côte d'Ivoire</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="maroc">
+                        <label for="maroc">Maroc</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="france">
+                        <label for="france">France</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des produits -->
+        <div class="products-content">
+            <div class="products-header">
+                <p><span id="productCount">14</span> produits</p>
+                <div class="sort-dropdown">
+                    <button class="sort-button">
+                        Trier par
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="sort-options">
+                        <div class="sort-option">Prix croissant</div>
+                        <div class="sort-option">Prix décroissant</div>
+                        <div class="sort-option">Meilleures ventes</div>
+                        <div class="sort-option">Nouveautés</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-grid">                <!-- Sel Vimi -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=sel-vimi" class="product-link">
+                        <img src="images/produit1.jpg" alt="Sel Vimi iodé" class="product-img">
+                        <h3>Sel Vimi iodé 350g</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(125)</div>
+                        <div class="price">
+                            <span class="current-price">500</span>
+                        </div>
+                        <p class="origin">Origine: Maroc / Reconditionné en Côte d'Ivoire</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Soumara Vimi -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=soumara" class="product-link">
+                        <img src="images/produit2.jpg" alt="Soumara Vimi moulu" class="product-img">
+                        <h3>Soumara Vimi moulu 150g</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(89)</div>
+                        <div class="price">
+                            <span class="current-price">1500</span>
+                        </div>
+                        <p class="origin">100% naturel, conditionné en Côte d'Ivoire</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Piment Vimi -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=piment" class="product-link">
+                        <img src="images/produit3.jpg" alt="Piment Vimi moulu" class="product-img">
+                        <h3>Piment Vimi moulu 140g</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(156)</div>
+                        <div class="price">
+                            <span class="current-price">1500</span>
+                        </div>
+                        <p class="origin">100% piment, séché et en poudre</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Farine Maïs -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=farine-mais" class="product-link">
+                        <img src="images/produit4.jpg" alt="Farine Maïs Dimi" class="product-img">
+                        <h3>Farine Maïs Dimi Jaune 1kg</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(78)</div>
+                        <div class="price">
+                            <span class="current-price">1500</span>
+                        </div>
+                        <p class="origin">100% Maïs Côte d'Ivoire, sans gluten</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Poudre de Baobab -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=poudre-baobab" class="product-link">
+                        <img src="images/produit5.jpg" alt="Poudre de Baobab Keda" class="product-img">
+                        <h3>Poudre de Baobab Keda 1kg</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(145)</div>
+                        <div class="price">
+                            <span class="current-price">2000</span>
+                        </div>
+                        <p class="origin">100% pulpe de baobab, sans gluten</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Poivre Vimi -->
+                <div class="product-card">
+                    <a href="product-detail.html?product=poivre" class="product-link">
+                        <img src="images/produit7.jpg" alt="Poivre Vimi moulu" class="product-img">
+                        <h3>Poivre Vimi moulu 160g</h3>
+                        <div class="rating">★★★★★</div>
+                        <div class="reviews">(98)</div>
+                        <div class="price">
+                            <span class="current-price">2000</span>
+                        </div>
+                        <p class="origin">100% poivre séché et en poudre</p>
+                    </a>
+                    <div class="product-actions">
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="bi bi-dash"></i></button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="bi bi-bag-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more">
+                <button>Charger plus de produits</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">
+                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="#">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sort dropdown functionality
+        const sortButton = document.querySelector('.sort-button');
+        const sortOptions = document.querySelector('.sort-options');
+
+        sortButton.addEventListener('click', () => {
+            sortOptions.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sortButton.contains(e.target)) {
+                sortOptions.classList.remove('active');
+            }
+        });
+
+        // Filter functionality
+        const filterOptions = document.querySelectorAll('.filter-option input');
+        filterOptions.forEach(option => {
+            option.addEventListener('change', updateFilters);
+        });
+
+        function updateFilters() {
+            // This function will be implemented to filter products
+            console.log('Filters updated');
+        }
+
+        // Price range functionality
+        const priceInputs = document.querySelectorAll('.price-range input');
+        priceInputs.forEach(input => {
+            input.addEventListener('input', updatePriceFilter);
+        });
+
+        function updatePriceFilter() {
+            // This function will be implemented to filter by price
+            console.log('Price filter updated');
+        }
+
+        // Load more functionality
+        const loadMoreButton = document.querySelector('.load-more button');
+        loadMoreButton.addEventListener('click', loadMoreProducts);
+
+        function loadMoreProducts() {
+            // This function will be implemented to load more products
+            console.log('Loading more products');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>À propos - Les Produits Vimi | Manger Naturel, c'est un choix pour votre santé</title>
+    <meta name="description" content="Découvrez Les Produits Vimi, votre source de confiance pour des produits alimentaires naturels et de qualité en Côte d'Ivoire. Avec VIMI, c'est Vivre Mieux!">    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/banner-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .about-section {
+            margin-bottom: 60px;
+        }
+
+        .about-section h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .about-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .about-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .mission-values {
+            background-color: #f9f9f9;
+            padding: 60px 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-header">
+                <h2>Rechercher un produit</h2>
+                <button class="close-search"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Rechercher un produit..." class="search-input">
+            </div>
+            <div class="popular-searches">
+                <h3>Recherches populaires</h3>
+                <div class="search-tags">
+                    <a href="#">Sel Vimi</a>
+                    <a href="#">Soumara</a>
+                    <a href="#">Piment</a>
+                    <a href="#">Farine Maïs</a>
+                    <a href="#">Miel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">
+                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                    <a href="register.html"><i class="bi bi-person-plus"></i> S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière À propos -->    <section class="about-hero">
+        <h1>À propos de Vimi</h1>
+        <p>Avec VIMI, c'est Vivre Mieux</p>
+        <p>Manger Naturel, c'est un choix pour votre santé</p>
+    </section>
+
+    <!-- Contenu principal -->
+    <div class="about-content">
+        <section class="about-section">
+            <h2>Notre Histoire</h2>
+            <p>VIMI AFRICA est une entreprise ivoirienne spécialisée dans la production et la distribution de produits alimentaires naturels de haute qualité. Notre engagement est de fournir des produits 100% naturels, sans conservateurs ni additifs artificiels, tout en valorisant les ressources locales de la Côte d'Ivoire.</p>
+        </section>
+
+        <section class="about-section mission-values">
+            <h2>Notre Mission</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">🌱</div>
+                    <h3>Qualité Bio</h3>
+                    <p>Nous sélectionnons rigoureusement nos produits pour garantir une qualité biologique exceptionnelle.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🤝</div>
+                    <h3>Commerce Équitable</h3>
+                    <p>Nous travaillons en étroite collaboration avec les producteurs locaux pour assurer des prix justes.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🌍</div>
+                    <h3>Développement Durable</h3>
+                    <p>Nous nous engageons à minimiser notre impact environnemental à chaque étape.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Nos Engagements</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">✨</div>
+                    <h3>Fraîcheur Garantie</h3>
+                    <p>Tous nos produits sont sélectionnés pour leur fraîcheur et leur qualité exceptionnelle.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🚚</div>
+                    <h3>Livraison Responsable</h3>
+                    <p>Nous optimisons nos livraisons pour réduire notre empreinte carbone.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">♻️</div>
+                    <h3>Emballages Écologiques</h3>
+                    <p>Nous utilisons des emballages biodégradables et recyclables.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="#">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script pour la fonctionnalité de recherche
+        const searchIcon = document.querySelector('.search-icon');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const closeSearch = document.querySelector('.close-search');
+
+        searchIcon.addEventListener('click', () => {
+            searchOverlay.style.display = 'flex';
+        });
+
+        closeSearch.addEventListener('click', () => {
+            searchOverlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

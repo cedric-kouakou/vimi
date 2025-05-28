@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - Les Produits Vimi</title>
+    <meta name="description" content="Gérez votre compte client Vimi, vos commandes et vos informations personnelles. Accédez à votre historique d'achats et vos adresses de livraison.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .account-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .account-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .account-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #6BB252;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .account-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        .account-email {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .account-menu {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #f5f5f5;
+            color: #4CAF50;
+        }
+
+        .menu-item.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .menu-item i {
+            font-size: 20px;
+        }
+
+        .account-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .address-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .address-type {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #212529;
+        }
+
+        .address-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            padding: 8px 15px;
+            background: #6BB252;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-delete {
+            padding: 8px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-save {
+            padding: 12px 30px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .order-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-number {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .order-date {
+            color: #666;
+        }
+
+        .order-total {
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-bottom: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 500;
+            color: #212529;
+        }
+
+        .order-item-price {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 968px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .account-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+            }
+
+            .menu-item {
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .account-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .order-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .order-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .address-actions {
+                justify-content: center;
+            }
+
+            .btn-save {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .account-page {
+                margin: 20px auto;
+            }
+
+            .content-title {
+                font-size: 20px;
+            }
+
+            .account-menu {
+                padding: 5px;
+            }
+
+            .menu-item {
+                padding: 10px;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>
+            </div>
+            <div class="user-dropdown">
+                <a href="account.html" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">
+                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="#"><i class="bi bi-box-arrow-right"></i> Se Connecter</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-header">
+                <h2>Rechercher un produit</h2>
+                <button class="close-search"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Rechercher un produit..." class="search-input">
+            </div>
+            <div class="popular-searches">
+                <h3>Recherches populaires</h3>
+                <div class="search-tags">
+                    <a href="#">Sel Vimi</a>
+                    <a href="#">Soumara</a>
+                    <a href="#">Piment</a>
+                    <a href="#">Farine Maïs</a>
+                    <a href="#">Miel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="account-page">
+        <div class="account-header">
+            <div class="account-avatar">
+                <i class="bi bi-person"></i>
+            </div>
+            <div class="account-title">
+                <h1>Jean </h1>
+                <p class="account-email">jean@email.com</p>
+            </div>
+        </div>
+
+        <div class="account-grid">
+            <!-- Menu du compte -->
+            <div class="account-menu">
+                <a href="#profile" class="menu-item active">
+                    <i class="bi bi-person-circle"></i>
+                    Mon Profil
+                </a>
+                <a href="#orders" class="menu-item">
+                    <i class="bi bi-clock-history"></i>
+                    Mes Commandes
+                </a>
+                <a href="#addresses" class="menu-item">
+                    <i class="bi bi-geo-alt"></i>
+                    Mes Adresses
+                </a>
+                <a href="#settings" class="menu-item">
+                    <i class="bi bi-gear"></i>
+                    Paramètres
+                </a>
+                <a href="#logout" class="menu-item">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Déconnexion
+                </a>
+            </div>
+
+            <!-- Contenu du compte -->
+            <div class="account-content">
+                <!-- Section Profil -->
+                <div id="profile-section">
+                    <h2 class="content-title">Mon Profil</h2>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" id="firstname" value="Jean">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nom</label>
+                            <input type="text" id="lastname" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="jean@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" value="+225 01 23 45 67 89">
+                        </div>
+                        <button type="submit" class="btn-save">Enregistrer les modifications</button>
+                    </form>
+                </div>
+
+                <!-- Section Commandes -->
+                <div id="orders-section" style="display: none;">
+                    <h2 class="content-title">Mes Commandes</h2>
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">Commande #123456</span>
+                            <span class="order-date">25 Mai 2025</span>
+                            <span class="order-total">4500 FCFA</span>
+                            <span class="order-status status-delivered">Livré</span>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="images/produit1.jpg" alt="Sel Vimi iodé">
+                                <div class="order-item-details">
+                                    <div class="order-item-name">Sel Vimi iodé 350g</div>
+                                    <div class="order-item-price">500 FCFA x 1</div>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <img src="images/produit2.jpg" alt="Soumara Vimi moulu">
+                                <div class="order-item-details">
+                                    <div class="order-item-name">Soumara Vimi moulu 150g</div>
+                                    <div class="order-item-price">1500 FCFA x 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Adresses -->
+                <div id="addresses-section" style="display: none;">
+                    <h2 class="content-title">Mes Adresses</h2>
+                    <div class="address-card">
+                        <div class="address-type">Adresse de livraison principale</div>
+                        <p>Jean Dupont<br>
+                           Rue 12, Quartier Angré<br>
+                           Cocody, Abidjan<br>
+                           +225 01 23 45 67 89</p>
+                        <div class="address-actions">
+                            <button class="btn-edit">Modifier</button>
+                            <button class="btn-delete">Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Paramètres -->
+                <div id="settings-section" style="display: none;">
+                    <h2 class="content-title">Paramètres</h2>
+                    <form id="settings-form">
+                        <div class="form-group">
+                            <label for="password">Ancien mot de passe</label>
+                            <input type="password" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Nouveau mot de passe</label>
+                            <input type="password" id="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmer le mot de passe</label>
+                            <input type="password" id="confirm-password">
+                        </div>
+                        <button type="submit" class="btn-save">Modifier le mot de passe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">
+                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="products.html">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation entre les sections
+        const menuItems = document.querySelectorAll('.menu-item');
+        const sections = {
+            'profile': document.getElementById('profile-section'),
+            'orders': document.getElementById('orders-section'),
+            'addresses': document.getElementById('addresses-section'),
+            'settings': document.getElementById('settings-section')
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.getAttribute('href').replace('#', '');
+                
+                // Mise à jour des classes actives
+                menuItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Affichage de la section correspondante
+                Object.values(sections).forEach(s => {
+                    if (s) s.style.display = 'none';
+                });
+                if (sections[section]) {
+                    sections[section].style.display = 'block';
+                }
+            });
+        });
+
+        // Gestion des formulaires
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Implémenter la sauvegarde du profil
+            console.log('Saving profile...');
+        });
+
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Implémenter le changement de mot de passe
+            console.log('Changing password...');
+        });
+
+        // Gestion des adresses
+        document.querySelectorAll('.btn-edit').forEach(button => {
+            button.addEventListener('click', function() {
+                // Implémenter la modification d'adresse
+                console.log('Editing address...');
+            });
+        });
+
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function() {
+                if (confirm('Êtes-vous sûr de vouloir supprimer cette adresse ?')) {
+                    // Implémenter la suppression d'adresse
+                    console.log('Deleting address...');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

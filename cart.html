@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - Les Produits Vimi</title>
+    <meta name="description" content="Gérez votre panier d'achats et finalisez votre commande de produits naturels Vimi. Livraison gratuite à partir de 5000 FCFA sur Abidjan.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cart-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .cart-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 30px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .cart-empty i {
+            font-size: 48px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .cart-empty p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-right: 20px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+
+        .item-price {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .item-remove {
+            color: #dc3545;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .summary-total {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .checkout-form {
+            margin-top: 30px;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .delivery-options {
+            margin-bottom: 20px;
+        }
+
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .delivery-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .delivery-option.selected {
+            border-color: #4CAF50;
+            background-color: #f8fff8;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            background-color: #45a049;
+        }
+
+        .promo-code {
+            margin-bottom: 20px;
+        }
+
+        .promo-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .promo-input button {
+            padding: 10px 20px;
+            background: #6BB252;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 968px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .item-image {
+                margin-right: 0;
+            }
+
+            .item-quantity {
+                justify-content: center;
+            }
+
+            .item-remove {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cart-page {
+                margin: 20px auto;
+            }
+
+            .cart-title {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .delivery-option {
+                padding: 10px;
+            }
+
+            .quantity-btn,
+            .quantity-input {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Vimi">
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon"><i class="bi bi-cart3"></i></a>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon"><i class="bi bi-person"></i></a>
+                <div class="user-menu">                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                    <a href="register.html"><i class="bi bi-person-plus"></i> S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-header">
+                <h2>Rechercher un produit</h2>
+                <button class="close-search"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Rechercher un produit..." class="search-input">
+            </div>
+            <div class="popular-searches">
+                <h3>Recherches populaires</h3>
+                <div class="search-tags">
+                    <a href="#">Sel Vimi</a>
+                    <a href="#">Soumara</a>
+                    <a href="#">Piment</a>
+                    <a href="#">Farine Maïs</a>
+                    <a href="#">Miel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="cart-page">
+        <h1 class="cart-title">Mon Panier</h1>
+        
+        <!-- Grille du panier -->
+        <div class="cart-grid">
+            <!-- Liste des produits -->
+            <div class="cart-items">
+                <!-- Exemple d'article -->
+                <div class="cart-item">
+                    <img src="images/produit1.jpg" alt="Sel Vimi iodé" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">Sel Vimi iodé 350g</h3>
+                        <p class="item-price">500 FCFA</p>
+                        <div class="item-quantity">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn">+</button>
+                            <span class="item-remove"><i class="bi bi-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <img src="images/produit2.jpg" alt="Soumara Vimi moulu" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">Soumara Vimi moulu 150g</h3>
+                        <p class="item-price">1500 FCFA</p>
+                        <div class="item-quantity">
+                            <button class="quantity-btn">-</button>
+                            <input type="number" class="quantity-input" value="2" min="1">
+                            <button class="quantity-btn">+</button>
+                            <span class="item-remove"><i class="bi bi-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Résumé de la commande -->
+            <div class="cart-summary">
+                <h2 class="summary-title">Résumé de la commande</h2>
+                <div class="promo-code">
+                    <p class="form-title">Code promo</p>
+                    <div class="promo-input">
+                        <input type="text" placeholder="Entrez votre code">
+                        <button>Appliquer</button>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <span>Sous-total</span>
+                    <span>3500 FCFA</span>
+                </div>
+                <div class="summary-row">
+                    <span>Livraison</span>
+                    <span>1000 FCFA</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>4500 FCFA</span>
+                </div>
+
+                <!-- Options de livraison -->
+                <div class="checkout-form">
+                    <h3 class="form-title">Mode de livraison</h3>
+                    <div class="delivery-options">
+                        <label class="delivery-option">
+                            <input type="radio" name="delivery" checked>
+                            <div>
+                                <strong>Livraison sur Abidjan</strong>
+                                <p>1000 FCFA (Gratuit dès 5000 FCFA)</p>
+                            </div>
+                        </label>
+                        <label class="delivery-option">
+                            <input type="radio" name="delivery">
+                            <div>
+                                <strong>Expédition autres villes</strong>
+                                <p>2000 FCFA (Gratuit dès 10 000 FCFA)</p>
+                            </div>
+                        </label>
+                    </div>
+                    <button class="checkout-btn">Passer la commande</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panier vide (caché par défaut) -->
+        <div class="cart-empty" style="display: none;">
+            <i class="bi bi-cart-x"></i>
+            <p>Votre panier est vide</p>
+            <a href="products.html" class="btn-primary">Découvrir nos produits</a>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">
+                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="products.html">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gestion des quantités
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-input');
+                const currentValue = parseInt(input.value);
+                
+                if (this.textContent === '+') {
+                    input.value = currentValue + 1;
+                } else if (this.textContent === '-' && currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+                
+                updateCartTotal();
+            });
+        });
+
+        // Suppression d'articles
+        document.querySelectorAll('.item-remove').forEach(button => {
+            button.addEventListener('click', function() {
+                const cartItem = this.closest('.cart-item');
+                cartItem.remove();
+                updateCartTotal();
+                
+                // Vérifier si le panier est vide
+                const cartItems = document.querySelectorAll('.cart-item');
+                if (cartItems.length === 0) {
+                    document.querySelector('.cart-grid').style.display = 'none';
+                    document.querySelector('.cart-empty').style.display = 'block';
+                }
+            });
+        });
+
+        // Options de livraison
+        document.querySelectorAll('.delivery-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.delivery-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                updateCartTotal();
+            });
+        });
+
+        // Mise à jour du total
+        function updateCartTotal() {
+            // Cette fonction serait implémentée pour calculer le total réel
+            console.log('Updating cart total...');
+        }
+    </script>
+</body>
+</html>
