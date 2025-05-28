@@ -299,71 +299,10 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script>
-        // Validation du formulaire
-        const form = document.getElementById('register-form');
-        const passwordToggles = document.querySelectorAll('.password-toggle');
-
-        // Gestion de l'affichage/masquage du mot de passe
-        passwordToggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const input = this.previousElementSibling;
-                const icon = this.querySelector('i');
-                
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.replace('bi-eye', 'bi-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.replace('bi-eye-slash', 'bi-eye');
-                }
-            });
-        });
-
-        // Validation à la soumission
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let isValid = true;
-
-            // Validation des champs requis
-            const requiredFields = form.querySelectorAll('[required]');
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.parentElement.querySelector('.error').style.display = 'block';
-                } else {
-                    field.parentElement.querySelector('.error').style.display = 'none';
-                }
-            });
-
-            // Validation de l'email
-            const email = document.getElementById('email');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email.value)) {
-                isValid = false;
-                email.parentElement.querySelector('.error').style.display = 'block';
-            }
-
-            // Validation du mot de passe
-            const password = document.getElementById('password');
-            const confirmPassword = document.getElementById('confirm-password');
-            
-            if (password.value.length < 8) {
-                isValid = false;
-                password.parentElement.querySelector('.error').style.display = 'block';
-            }
-
-            if (password.value !== confirmPassword.value) {
-                isValid = false;
-                confirmPassword.parentElement.querySelector('.error').style.display = 'block';
-            }
-
-            // Si tout est valide, on peut soumettre le formulaire
-            if (isValid) {
-                console.log('Formulaire valide, envoi des données...');
-                // Ici, vous pouvez ajouter le code pour envoyer les données au serveur
-            }
-        });
+        const form = document.querySelector('form');
+        // ...existing code...
     </script>
 </body>
 </html>

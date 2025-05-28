@@ -44,8 +44,9 @@ nav a {
 
 .header-icons {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     align-items: center;
+    position: relative;
 }
 
 .header-icons a {
@@ -911,6 +912,51 @@ footer {
 
     .nav-close {
         display: block;
+    }
+
+    .header-icons {
+        gap: 15px;
+    }
+
+    .cart-dropdown, .user-dropdown {
+        position: static;
+    }
+
+    .cart-preview, .user-menu {
+        position: fixed;
+        top: 108px;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .user-menu {
+        background: white;
+        padding: 15px;
+        border-radius: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .cart-preview {
+        padding: 15px;
+        border-radius: 0;
+        border-top: 1px solid #eee;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-icons {
+        gap: 10px;
+    }
+
+    .header-icons a i {
+        font-size: 1.2em;
+    }
+
+    .cart-icon, .user-icon, .search-icon {
+        padding: 8px;
     }
 }
 
