@@ -982,7 +982,8 @@ footer {
     }
 
     .products-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }
 
@@ -1166,12 +1167,18 @@ footer {
     }
 
     .products-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     .product-card {
-        max-width: 320px;
-        margin: 0 auto;
+        max-width: none;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .product-img {
+        height: 150px;
     }
 
     .benefit-card {
