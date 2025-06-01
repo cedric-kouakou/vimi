@@ -148,26 +148,44 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-        }
-
-        .load-more {
-            text-align: center;
+        }        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             margin-top: 40px;
         }
 
-        .load-more button {
-            padding: 12px 30px;
-            background-color: #6BB252;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            font-size: 14px;
         }
 
-        .load-more button:hover {
-            background-color: #5a9644;
+        .page-btn:hover:not([disabled]) {
+            background-color: #f8f9fa;
+            border-color: #6BB252;
+            color: #6BB252;
+        }
+
+        .page-btn.active {
+            background-color: #6BB252;
+            border-color: #6BB252;
+            color: white;
+            cursor: default;
+        }
+
+        .page-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .product-actions {
@@ -609,10 +627,12 @@
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <div class="load-more">
-                <button>Charger plus de produits</button>
+            </div>            <div class="pagination">
+                <button class="page-btn prev" disabled><i class="bi bi-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn next"><i class="bi bi-chevron-right"></i></button>
             </div>
         </div>
     </section>
@@ -688,15 +708,57 @@
         function updatePriceFilter() {
             // This function will be implemented to filter by price
             console.log('Price filter updated');
-        }
+        }        // Pagination functionality
+        const pageButtons = document.querySelectorAll('.page-btn:not(.prev):not(.next)');
+        const prevButton = document.querySelector('.page-btn.prev');
+        const nextButton = document.querySelector('.page-btn.next');
 
-        // Load more functionality
-        const loadMoreButton = document.querySelector('.load-more button');
-        loadMoreButton.addEventListener('click', loadMoreProducts);
+        pageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!button.classList.contains('active')) {
+                    // Remove active class from current active button
+                    document.querySelector('.page-btn.active').classList.remove('active');
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Enable/disable prev/next buttons based on current page
+                    const currentPage = parseInt(button.textContent);
+                    prevButton.disabled = currentPage === 1;
+                    nextButton.disabled = currentPage === pageButtons.length;
 
-        function loadMoreProducts() {
-            // This function will be implemented to load more products
-            console.log('Loading more products');
+                    // Load products for the selected page
+                    loadProductsForPage(currentPage);
+                }
+            });
+        });
+
+        prevButton.addEventListener('click', () => {
+            const currentActive = document.querySelector('.page-btn.active');
+            const currentPage = parseInt(currentActive.textContent);
+            if (currentPage > 1) {
+                currentActive.classList.remove('active');
+                pageButtons[currentPage - 2].classList.add('active');
+                prevButton.disabled = currentPage - 1 === 1;
+                nextButton.disabled = false;
+                loadProductsForPage(currentPage - 1);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            const currentActive = document.querySelector('.page-btn.active');
+            const currentPage = parseInt(currentActive.textContent);
+            if (currentPage < pageButtons.length) {
+                currentActive.classList.remove('active');
+                pageButtons[currentPage].classList.add('active');
+                nextButton.disabled = currentPage + 1 === pageButtons.length;
+                prevButton.disabled = false;
+                loadProductsForPage(currentPage + 1);
+            }
+        });
+
+        function loadProductsForPage(page) {
+            // Cette fonction sera implémentée pour charger les produits de la page sélectionnée
+            console.log(`Loading products for page ${page}`);
         }
     </script>
 </body>

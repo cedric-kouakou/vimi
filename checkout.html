@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation de commande - Les Produits Vimi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .checkout-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .checkout-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 30px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-items {
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .summary-total {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .delivery-options {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .delivery-type {
+            margin-bottom: 20px;
+        }
+
+        .delivery-type label {
+            display: block;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .delivery-type label:hover {
+            border-color: #c61717;
+        }
+
+        .delivery-type input[type="radio"]:checked + label {
+            border-color: #c61717;
+            background-color: #fff5f5;
+        }
+
+        .delivery-type input[type="radio"] {
+            display: none;
+        }
+
+        .delivery-form {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #212529;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #495057;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #c61717;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(198, 23, 23, 0.1);
+        }
+
+        .required:after {
+            content: "*";
+            color: #c61717;
+            margin-left: 4px;
+        }
+
+        .payment-method {
+            margin-top: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .payment-option img {
+            height: 24px;
+            width: auto;
+        }
+
+        .terms {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 15px;
+            background: #c61717;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .place-order:hover {
+            background: #a01212;
+        }
+
+        @media (max-width: 968px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-page {
+                margin: 20px auto;
+            }
+
+            .checkout-title {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        Créez un compte (Simple et rapide) et Bénéficiez de code promo pour votre prochaine commande
+    </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="menu-toggle">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Logo Vimi">
+            </a>
+        </div>
+        <nav>
+            <div class="nav-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Nos produits</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" class="search-icon">
+                <i class="bi bi-search"></i>
+                <span class="icon-label">Rechercher</span>
+            </a>
+            <div class="cart-dropdown">
+                <a href="cart.html" class="cart-icon">
+                    <i class="bi bi-cart3"></i>
+                    <span class="icon-label">Mon panier</span>
+                </a>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="user-icon">
+                    <i class="bi bi-person"></i>
+                    <span class="icon-label">Mon compte</span>
+                </a>
+                <div class="user-menu">
+                    <a href="account.html"><i class="bi bi-person-circle"></i> Mon Compte</a>
+                    <a href="account.html#orders"><i class="bi bi-clock-history"></i> Mes Commandes</a>
+                    <a href="#"><i class="bi bi-heart"></i> Liste de Souhaits</a>
+                    <a href="login.html"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+                    <a href="register.html"><i class="bi bi-person-plus"></i> S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu Principal -->
+    <main class="checkout-page">
+        <h1 class="checkout-title">Validation de la commande</h1>
+
+        <div class="checkout-grid">
+            <!-- Formulaires de livraison -->
+            <div class="checkout-forms">
+                <!-- Options de livraison -->
+                <div class="delivery-options">
+                    <h2 class="section-title">Mode de livraison</h2>
+                    <div class="delivery-type">
+                        <input type="radio" id="abidjan" name="delivery" checked>
+                        <label for="abidjan">
+                            <strong>Livraison sur Abidjan</strong>
+                            <p>1000 FCFA (Gratuit à partir de 5000 FCFA d'achat)</p>
+                        </label>
+                    </div>
+                    <div class="delivery-type">
+                        <input type="radio" id="expedition" name="delivery">
+                        <label for="expedition">
+                            <strong>Expédition autres villes</strong>
+                            <p>2000 FCFA (Gratuit à partir de 10 000 FCFA d'achat)</p>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Formulaire livraison Abidjan -->
+                <form id="abidjanForm" class="delivery-form">
+                    <div class="form-section">
+                        <h2 class="section-title">Informations personnelles</h2>
+                        <div class="form-group">
+                            <label class="required" for="abidjan-firstName">Prénom</label>
+                            <input type="text" id="abidjan-firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="abidjan-lastName">Nom</label>
+                            <input type="text" id="abidjan-lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="abidjan-phone">Téléphone</label>
+                            <input type="tel" id="abidjan-phone" pattern="[0-9]{10}" placeholder="Ex: 0151035443" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="abidjan-email">E-mail</label>
+                            <input type="email" id="abidjan-email" placeholder="exemple@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2 class="section-title">Adresse de livraison</h2>                    <div class="form-group">
+                            <label class="required" for="abidjan-commune">Commune</label>
+                            <select id="abidjan-commune" required>
+                                <option value="">Sélectionnez une commune</option>
+                                <option value="Abobo">Abobo</option>
+                                <option value="Adjamé">Adjamé</option>
+                                <option value="Attécoubé">Attécoubé</option>
+                                <option value="Cocody">Cocody</option>
+                                <option value="Koumassi">Koumassi</option>
+                                <option value="Marcory">Marcory</option>
+                                <option value="Plateau">Plateau</option>
+                                <option value="Port-Bouët">Port-Bouët</option>
+                                <option value="Treichville">Treichville</option>
+                                <option value="Yopougon">Yopougon</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="abidjan-quartier">Quartier</label>
+                            <input type="text" id="abidjan-quartier" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="abidjan-reference">Point de référence</label>
+                            <input type="text" id="abidjan-reference" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="abidjan-consignes">Consignes de livraison</label>
+                            <textarea id="abidjan-consignes" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Formulaire expédition autres villes -->
+                <form id="expeditionForm" class="delivery-form" style="display: none;">
+                    <div class="form-section">
+                        <h2 class="section-title">Informations personnelles</h2>
+                        <div class="form-group">
+                            <label class="required" for="expedition-firstName">Prénom</label>
+                            <input type="text" id="expedition-firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="expedition-lastName">Nom</label>
+                            <input type="text" id="expedition-lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="expedition-phone">Téléphone</label>
+                            <input type="tel" id="expedition-phone" pattern="[0-9]{10}" placeholder="Ex: 0151035443" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expedition-email">E-mail</label>
+                            <input type="email" id="expedition-email" placeholder="exemple@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2 class="section-title">Informations d'expédition</h2>                    <div class="form-group">
+                            <label class="required" for="expedition-ville">Ville</label>
+                            <select id="expedition-ville" required>
+                                <option value="">Sélectionnez une ville</option>
+                                <option value="Bassam">Bassam</option>
+                                <option value="Bingerville">Bingerville</option>
+                                <option value="Dabou">Dabou</option>
+                                <option value="Bonoua">Bonoua</option>
+                                <option value="Aboisso">Aboisso</option>
+                                <option value="Ayanma">Ayanma</option>
+                                <option value="Alépé">Alépé</option>
+                                <option value="Jacqueville">Jacqueville</option>
+                                <option value="Songon">Songon</option>
+                                <option value="Agboville">Agboville</option>
+                                <option value="Adzopé">Adzopé</option>
+                                <option value="Adiaké">Adiaké</option>
+                                <option value="San-Pédro">San-Pédro</option>
+                                <option value="Tiassalé">Tiassalé</option>
+                                <option value="Divo">Divo</option>
+                                <option value="Lakota">Lakota</option>
+                                <option value="Gagnoa">Gagnoa</option>
+                                <option value="Daloa">Daloa</option>
+                                <option value="Abengourou">Abengourou</option>
+                                <option value="Bongouanou">Bongouanou</option>
+                                <option value="Bondoukou">Bondoukou</option>
+                                <option value="Yamoussoukro">Yamoussoukro</option>
+                                <option value="Bouaké">Bouaké</option>
+                                <option value="Korhogo">Korhogo</option>
+                                <option value="Ferkessedougou">Ferkessedougou</option>
+                                <option value="Soubré">Soubré</option>
+                                <option value="Toumodi">Toumodi</option>
+                                <option value="Issia">Issia</option>
+                                <option value="Man">Man</option>
+                                <option value="Duékoué">Duékoué</option>
+                                <option value="Daoukro">Daoukro</option>
+                                <option value="Bouaflé">Bouaflé</option>
+                                <option value="Bouna">Bouna</option>
+                                <option value="Seguela">Seguela</option>
+                                <option value="Boundiali">Boundiali</option>
+                                <option value="Katiola">Katiola</option>
+                                <option value="Dimbokro">Dimbokro</option>
+                                <option value="Sassandra">Sassandra</option>
+                                <option value="Tabou">Tabou</option>
+                                <option value="Guiglo">Guiglo</option>
+                                <option value="Danané">Danané</option>
+                                <option value="Odiénné">Odiénné</option>
+                                <option value="Vavoua">Vavoua</option>
+                                <option value="M'bahiakro">M'bahiakro</option>
+                                <option value="Tanda">Tanda</option>
+                                <option value="Agnibilekrou">Agnibilekrou</option>
+                                <option value="Ouangolodougou">Ouangolodougou</option>
+                                <option value="Kong">Kong</option>
+                                <option value="autre">Autre ville (à préciser)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="autre-ville-group" style="display: none;">
+                            <label class="required" for="autre-ville">Précisez la ville</label>                            <input type="text" id="autre-ville" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expedition-consignes">Instructions d'expédition</label>
+                            <textarea id="expedition-consignes" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Code promo -->
+                <div class="form-section">
+                    <details class="promo-code">
+                        <summary>Avez-vous un code promo ?</summary>
+                        <div class="form-group">
+                            <input type="text" id="promo-code" placeholder="Entrez votre code promo">
+                            <button type="button" class="btn-secondary">Appliquer</button>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Conditions générales -->
+                <div class="terms">
+                    <label class="required">
+                        <input type="checkbox" required>
+                        J'ai lu et j'accepte les conditions générales
+                    </label>
+                </div>
+
+                <button type="submit" class="place-order">Valider la commande</button>
+            </div>
+
+            <!-- Résumé de la commande -->
+            <div class="order-summary">
+                <h2 class="summary-title">Résumé de la commande</h2>
+                <div class="summary-items">
+                    <!-- Les articles seront ajoutés dynamiquement ici -->
+                </div>
+                <div class="summary-item">
+                    <span>Sous-total</span>
+                    <span>3500 FCFA</span>
+                </div>
+                <div class="summary-item">
+                    <span>Livraison</span>
+                    <span>1000 FCFA</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>4500 FCFA</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Logo Vimi">
+                </a>
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-row">
+                    <div class="link-column">
+                        <h3>VIMI AFRICA</h3>
+                        <ul>
+                            <li><a href="about.html">À propos de nous</a></li>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Devenir représentant</a></li>
+                            <li><a href="products.html">Nos produits</a></li>
+                            <li><a href="#">Offre du Mois</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Service Client</h3>
+                        <ul>
+                            <li><a href="#">Aide et Assistance</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Politique de Retour</a></li>
+                            <li><a href="#">Informations de livraison</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Les produits vimi. tous droit reserver</p>
+        </div>
+    </footer>    <script>
+        // Gestion de l'affichage du champ "Autre ville"
+        const villeSelect = document.getElementById('expedition-ville');
+        const autreVilleGroup = document.getElementById('autre-ville-group');
+        const autreVilleInput = document.getElementById('autre-ville');
+
+        villeSelect.addEventListener('change', function() {
+            if (this.value === 'autre') {
+                autreVilleGroup.style.display = 'block';
+                autreVilleInput.setAttribute('required', '');
+            } else {
+                autreVilleGroup.style.display = 'none';
+                autreVilleInput.removeAttribute('required');
+            }
+        });
+
+        // Gestion de l'affichage des formulaires
+        const deliveryOptions = document.querySelectorAll('input[name="delivery"]');
+        const abidjanForm = document.getElementById('abidjanForm');
+        const expeditionForm = document.getElementById('expeditionForm');
+
+        deliveryOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                if (this.id === 'abidjan') {
+                    abidjanForm.style.display = 'block';
+                    expeditionForm.style.display = 'none';
+                } else {
+                    abidjanForm.style.display = 'none';
+                    expeditionForm.style.display = 'block';
+                }
+            });
+        });
+
+        // Validation du formulaire
+        document.querySelector('.place-order').addEventListener('click', function(e) {
+            e.preventDefault();
+            const activeForm = document.querySelector('input[name="delivery"]:checked').id === 'abidjan'
+                ? abidjanForm
+                : expeditionForm;
+            
+            if (activeForm.checkValidity()) {
+                // Traitement de la commande
+                console.log('Commande validée !');
+                // Redirection vers la page de confirmation ou ouverture de WhatsApp pour l'expédition
+            } else {
+                activeForm.reportValidity();
+            }
+        });
+    </script>
+</body>
+</html>
